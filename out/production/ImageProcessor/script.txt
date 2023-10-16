@@ -1,0 +1,34 @@
+This is an example of running the Image Processor main method.
+
+First, you need to type in:
+
+    load res/test.ppm 2x2
+
+You need to load the file first, and it can be any file in the res folder, in this case
+it is the test.ppm file, and we renamed it 2x2.
+
+Then, you need to type in:
+
+    vertical-flip 2x2 2x2Flipped
+
+At this point you can call any function from the menu, this is an example. We flipped it and called
+it 2x2Flipped.
+
+You can also do:
+
+    brighten 2x2Flipped 2x2Brighter 10
+
+This means we can take the 2x2Flipped image and rename it to 2x2Brighter and we just made each pixel
+increase by a value of 10.
+
+Next, you can type:
+
+    red-component 2x2Brighter 2x2Red
+
+This will make a greyscale of the image using the red component and call it 2x2Red.
+
+Finally, you can type:
+
+    save res/2x2Red.ppm 2x2New
+
+This should save what we just created in the hashmap and call it by the given name (2x2New).

@@ -1,0 +1,37 @@
+load-other panda.jpg p1
+blur p1 blur
+save-other blur.jpg blur
+load-other panda.jpg p2
+brighten p2 bright 10
+save-other bright.jpg bright
+load-other panda.jpg p3
+red-component p3 red
+save-other red.jpg red
+load-other panda.jpg p4
+green-component p4 green
+save-other green.jpg green
+load-other panda.jpg p5
+blue-component p5 blue
+save-other blue.jpg blue
+load-other panda.jpg p6
+horizontal-flip p6 hf
+save-other hf.jpg hf
+load-other panda.jpg p7
+intensity p7 intense
+save-other intense.jpg intense
+load-other panda.jpg p8
+luma p8 luma
+save-other luma.jpg luma
+load-other panda.jpg p9
+new-luma p9 lumaNew
+save-other newLuma.jpg lumaNew
+load-other panda.jpg p10
+value p10 value
+save-other value.jpg value
+load-other panda.jpg p11
+vertical-flip p11 vf
+save-other vf.jpg vf
+load-other panda.jpg p12
+sepia p12 sepia
+save-other sepia.jpg sepia
+q

@@ -1,0 +1,26 @@
+load-other panda.jpg panda
+blur panda blur
+save-other blur.jpg blur
+brighten panda bright 10
+save-other bright.jpg bright
+red-component panda red
+save-other red.jpg red
+green-component panda green
+save-other green.jpg green
+blue-component panda blue
+save-other blue.jpg blue
+horizontal-flip panda hf
+save-other hf.jpg hf
+intensity panda intense
+save-other intense.jpg intense
+luma panda luma
+save-other luma.jpg luma
+new-luma panda lumaNew
+save-other newLuma.jpg lumaNew
+value panda value
+save-other value.jpg value
+vertical-flip panda vf
+save-other vf.jpg vf
+sepia panda sepia
+save-other sepia.jpg sepia
+q

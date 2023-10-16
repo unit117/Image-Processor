@@ -1,0 +1,260 @@
+package view;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+import model.ImageProcessorModel;
+
+public class ImageProcessorGuiViewImpl extends JFrame implements ImageProcessorGuiVew {
+
+  private String fileName;
+  private String reName;
+  private int userValueInput;
+
+  private JLabel fileOpenDisplay;
+  private JLabel fileSaveDisplay;
+  private JButton loadButton;
+  private JButton saveButton;
+  private JButton blurButton;
+  private JButton brightenButton;
+  private JButton blueCompButton;
+  private JButton greenCompButton;
+  private JButton redCompButton;
+  private JButton horizontalFlipButton;
+  private JButton verticalFlipButton;
+  private JButton intensityButton;
+  private JButton sepiaButton;
+  private JButton sharpenButton;
+  private JButton valueButton;
+  private JButton lumaButton;
+  private JButton newLumaButton;
+  private JPanel mainPanel;
+  private JPanel imagePanel;
+  private JLabel imageLabel;
+  private JScrollPane imageScrollPane;
+  private JScrollPane mainScrollPane;
+
+  private ImageProcessorModel model;
+
+
+  public ImageProcessorGuiViewImpl(ImageProcessorModel model) {
+    super();
+    if (model == null) {
+      throw new IllegalArgumentException("Model is null!");
+    }
+    this.model = model;
+    start();
+    makeImagePanel();
+    makeButtons();
+    addHistogramPanel();
+    pack();
+  }
+
+  private void start() {
+    setTitle("Photoshop");
+    setSize(1920, 1200);
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.setResizable(true);
+    mainPanel = new JPanel();
+    mainPanel.setLayout(new BorderLayout());
+    mainScrollPane = new JScrollPane(mainPanel);
+    add(mainScrollPane);
+    setVisible(true);
+  }
+
+
+  private void makeImagePanel() {
+    //show an image with a scrollbar
+    imagePanel = new JPanel();
+    //a border around the panel with a caption
+    imagePanel.setBorder(BorderFactory.createTitledBorder("Image: "));
+    imagePanel.setLayout(new GridLayout());
+    mainPanel.add(imagePanel, BorderLayout.CENTER);
+
+
+    imageLabel = new JLabel();
+    JPanel imageScrollPanel = new JPanel();
+    imageScrollPanel.setLayout(new GridBagLayout());
+    imageScrollPanel.add(imageLabel);
+    imageScrollPane = new JScrollPane(imageScrollPanel);
+    imageScrollPane.setPreferredSize(new Dimension(600, 300));
+    imagePanel.add(imageScrollPane);
+  }
+
+
+  private void makeButtons() {
+    JPanel filtersPanel = new JPanel();
+    filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
+    mainPanel.add(filtersPanel, BorderLayout.WEST);
+
+    loadButton = new JButton("load");
+    saveButton = new JButton("save");
+    blurButton = new JButton("blur");
+    brightenButton = new JButton("brighten");
+    blueCompButton = new JButton("blue-component");
+    greenCompButton = new JButton("green-component");
+    redCompButton = new JButton("red-component");
+    horizontalFlipButton = new JButton("horizontal-flip");
+    verticalFlipButton = new JButton("vertical-flip");
+    intensityButton = new JButton("intensity");
+    sepiaButton = new JButton("sepia");
+    sharpenButton = new JButton("sharpen");
+    valueButton = new JButton("value");
+    lumaButton = new JButton("luma");
+    newLumaButton = new JButton("new-luma");
+
+    JPanel buttonsPanel = new JPanel();
+    buttonsPanel.setLayout(new BoxLayout(buttonsPanel, BoxLayout.Y_AXIS));
+    buttonsPanel.setAlignmentY(Component.LEFT_ALIGNMENT);
+    filtersPanel.add(Box.createVerticalStrut(5));
+    filtersPanel.add(buttonsPanel);
+
+    JPanel loadAndSavePanel = new JPanel();
+    loadAndSavePanel.setBorder(BorderFactory.createTitledBorder("Load and Save"));
+    mainPanel.add(loadAndSavePanel, BorderLayout.NORTH);
+
+    JPanel loadAndSave = new JPanel();
+    loadAndSave.setLayout(new BoxLayout(loadAndSave, BoxLayout.X_AXIS));
+    loadAndSavePanel.add(loadAndSave);
+
+    JPanel loadImage = new JPanel();
+    loadImage.setLayout(new FlowLayout());
+    loadAndSave.add(loadImage);
+    JButton fileOpenButton = new JButton("load");
+    fileOpenButton.setActionCommand("Load");
+    loadImage.add(fileOpenButton);
+    fileOpenDisplay = new JLabel();
+    loadImage.add(fileOpenDisplay);
+
+    JPanel saveImage = new JPanel();
+    saveImage.setLayout(new FlowLayout());
+    loadAndSave.add(saveImage);
+    JButton fileSaveButton = new JButton("save");
+    fileSaveButton.setActionCommand("Load");
+    saveImage.add(fileSaveButton);
+    fileSaveDisplay = new JLabel();
+    saveImage.add(fileSaveDisplay);
+
+    buttonsPanel.add(blurButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    blurButton.setActionCommand("Blur");
+    buttonsPanel.add(brightenButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    brightenButton.setActionCommand("Brighten");
+    buttonsPanel.add(greenCompButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    greenCompButton.setActionCommand("Green");
+    buttonsPanel.add(redCompButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    redCompButton.setActionCommand("Red");
+    buttonsPanel.add(blueCompButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    blueCompButton.setActionCommand("Blue");
+    buttonsPanel.add(horizontalFlipButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    horizontalFlipButton.setActionCommand("Horizontal");
+    buttonsPanel.add(verticalFlipButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    verticalFlipButton.setActionCommand("Vertical");
+    buttonsPanel.add(intensityButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    intensityButton.setActionCommand("Intensity");
+    buttonsPanel.add(lumaButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    lumaButton.setActionCommand("Luma");
+    buttonsPanel.add(newLumaButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    newLumaButton.setActionCommand("New-luma");
+    buttonsPanel.add(valueButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    valueButton.setActionCommand("Value");
+    buttonsPanel.add(sepiaButton);
+    buttonsPanel.add(Box.createVerticalStrut(5));
+    sepiaButton.setActionCommand("Sepia");
+    buttonsPanel.add(sharpenButton);
+    sharpenButton.setActionCommand("Sharpen");
+  }
+
+
+  private void addHistogramPanel() {
+    JScrollPane histogramPanel = new JScrollPane();
+    histogramPanel.setBorder(BorderFactory.createTitledBorder("Histogram: "));
+    mainPanel.add(histogramPanel, BorderLayout.SOUTH);
+    loadButton.setActionCommand("Histogram");
+  }
+
+
+
+  @Override
+  public void renderMessage(String message) throws IOException {
+    imageLabel.setText(message);
+  }
+
+  @Override
+  public void renderImage(BufferedImage image) {
+    imageLabel.setIcon(new ImageIcon(image));
+  }
+
+
+  private void setFileName(String fileName) {
+    this.fileName = fileName;
+  }
+
+  private void setReName(String reName) {
+    this.reName = reName;
+  }
+
+  public String getFileName() {
+    return this.fileName;
+  }
+
+  public String getReName() {
+    return this.reName;
+  }
+
+  public int getUserValueInput() {
+    return this.userValueInput;
+  }
+
+  private void valueChanged(ListSelectionEvent e) {
+    // We don't know which list called this callback, because we're using it
+    // for two lists.  In practice, you should use separate listeners
+    JOptionPane.showInputDialog(ImageProcessorGuiViewImpl.this,
+            "What would you like to rename this image? " + e.getSource(), "Source", JOptionPane.PLAIN_MESSAGE);
+  }
+
+  @Override
+  public void repaint() {
+    this.repaint();
+  }
+
+
+  public void setListener(ActionListener actionListener) {
+    this.blurButton.addActionListener(actionListener);
+    this.sharpenButton.addActionListener(actionListener);
+    this.sepiaButton.addActionListener(actionListener);
+    this.brightenButton.addActionListener(actionListener);
+    this.blueCompButton.addActionListener(actionListener);
+    this.verticalFlipButton.addActionListener(actionListener);
+    this.newLumaButton.addActionListener(actionListener);
+    this.lumaButton.addActionListener(actionListener);
+    this.horizontalFlipButton.addActionListener(actionListener);
+    this.greenCompButton.addActionListener(actionListener);
+    this.redCompButton.addActionListener(actionListener);
+
+  }
+
+  public void resetFocus() {
+    this.setFocusable(true);
+    this.requestFocus();
+  }
+}

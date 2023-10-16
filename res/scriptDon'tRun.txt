@@ -1,0 +1,124 @@
+This is an example of running the Image Processor main method.
+
+First, you need to type in:
+
+    load-other res/png/city.png c
+
+You need to load the file first, and it can be any file in the res folder, in this case
+it is the city.png file, which is in the png folder in the res folder, and we renamed it city.
+
+Then, you need to type in:
+
+    blur city cityBlurred
+
+At this point you can call any function from the menu, this is an example. We blurred it and called
+it cityBlurred. You can save here to look at the image, but you can also keep going.
+
+You can also do:
+
+    sepia cityBlurred cityBlurSepia
+
+This means we can take the cityBlurred image and rename it to cityBlurSepia, and we just added the blur and
+the sepia filters on the city.png image. You can save here to look at the image, but you can also keep going.
+
+Next, you can type:
+
+    sharpen cityBlurSepia cityBlurSepiaSharp
+
+This will make a sharpened image of the already blurred and sepia-ed image using the matrix and
+rename cityBlurSepiaSharp. You can save here to look at the image, but you can also keep going.
+
+Then, you can type:
+
+    new-luma cityBlurSepiaSharp cityBlurSepiaSharpLuma
+
+This will add the luma effect on the already altered image. You can save here to look at the image,
+but you can also keep going.
+
+Finally, you can type:
+
+    save-other res/png/newCity.ppm cityBlurSepiaSharpLuma
+
+This should save what we just created in and call it by the given name (newCity). You can navigate to
+the res folder and then the png folder
+
+
+
+
+
+
+
+
+This is an example of running the Image Processor main method.
+
+First, you need to type in:
+
+    load res/test.ppm 2x2
+
+You need to load the file first, and it can be any file in the res folder, in this case
+it is the test.ppm file, and we renamed it 2x2.
+
+Then, you need to type in:
+
+    vertical-flip 2x2 2x2Flipped
+
+At this point you can call any function from the menu, this is an example. We flipped it and called
+it 2x2Flipped.
+
+You can also do:
+
+    brighten 2x2Flipped 2x2Brighter 10
+
+This means we can take the 2x2Flipped image and rename it to 2x2Brighter and we just made each pixel
+increase by a value of 10.
+
+Next, you can type:
+
+    red-component 2x2Brighter 2x2Red
+
+This will make a greyscale of the image using the red component and call it 2x2Red.
+
+Next, you can type:
+
+    horizontal-flip 2x2Red 2x2Horizontal
+
+This will take the previous image and horizontally flip.
+
+Next, you can type:
+
+    blue-component 2x2Horizontal 2x2Blue
+
+This will apply the blue-component greyscale on the image before.
+
+Next, you can type:
+
+    green-component 2x2Blue 2x2Green
+
+This will apply the blue-component greyscale on the image before.
+
+Next, you can type:
+
+    value 2x2Green 2x2Value
+
+This will apply the value greyscale on the image before.
+
+Next, you can type:
+
+    intensity 2x2Value 2x2Intense
+
+This will apply the intensity greyscale on the image before.
+
+Next, you can type:
+
+    luma 2x2Intense 2x2Luma
+
+This will apply the luma effect on the image before.
+
+Finally, you can type:
+
+    save res/alteredImage.ppm 2x2Luma
+
+This should save what we just created and call it by the given name (alteredImage).
+
+
+You can use this on any image and save at any time.
